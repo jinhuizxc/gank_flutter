@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:gank_flutter/colors.dart';
+
+import 'gank/MainPage.dart';
 
 
 /*
  * flutter开发的干货集中营客户端
  * https://github.com/fujianlian/GankFlutter
+ *
+ * 模仿学习
  */
 // 程序入口
-void main() => runApp(MyApp());
+void main() => runApp(MyApp1());
 
-//
+class MyApp1 extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Flutter Study",
+      theme: ThemeData(
+        primarySwatch: mainColor,
+        scaffoldBackgroundColor: Color(0xFFF7F7F7),
+      ),
+      home: MainPage(),
+    );
+  }
+}
+
+/*
+ * primaryColor:
+ */
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   // 复写方法
@@ -17,14 +39,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Flutter App",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColorDark: Colors.blue,
       ),
       home: MyHomePage(title: "Flutter gank"), // 显示标题
     );
   }
 }
 
-// 写完一个语句, 以分号结尾;
+// 写完一个语句, 以分号结尾, 控件内部用逗号，定义变量用分号;
 class MyHomePage extends StatefulWidget {
   final String title;
 
@@ -62,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Text("You have pushed the button this many times:"),
             Text(
               "$_counter",
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.display1,  // textTheme/accentTextTheme:颜色显示不同， display1/2/3/4对应字体显示大小
             )
           ],
         ),
