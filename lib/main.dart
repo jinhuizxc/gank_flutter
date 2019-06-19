@@ -9,6 +9,13 @@ import 'gank/MainPage.dart';
  * https://github.com/fujianlian/GankFlutter
  *
  * 模仿学习
+ *
+ * Flutter JSON序列化自动构建
+ * https://blog.csdn.net/act64/article/details/89385429
+ *
+ * flutter常用插件
+ * https://blog.csdn.net/julystroy/article/details/88032768
+ *
  */
 // 程序入口
 void main() => runApp(MyApp1());
