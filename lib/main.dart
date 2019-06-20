@@ -16,6 +16,27 @@ import 'gank/MainPage.dart';
  * flutter常用插件
  * https://blog.csdn.net/julystroy/article/details/88032768
  *
+ * Flutter json转实体类（插件自动生成）
+ * https://blog.csdn.net/yuzhiqiang_1993/article/details/88533166
+ *
+ * flutter打包发布apk;
+ * https://www.jianshu.com/p/fabcfd621e01
+ * https://www.cnblogs.com/gdsblog/p/10100972.html
+ *
+ * 打包apk命令:  flutter build apk
+ *
+ * 生成apk路径, 但是没看到到;
+ * Built build\app\outputs\apk\release\app-release.apk (6.1MB).
+ *
+ * 在设备上安装发行版APK#
+ * 用USB您的Android设备连接到您的电脑
+ * cd .
+ * 运行 flutter install .
+ *
+ * 遇到的坑:
+ * flutter -webview 报错 err_cleartext_not_permitted(与原生类似)
+ * https://www.cnblogs.com/gggggggxin/p/10518324.html
+ *
  */
 // 程序入口
 void main() => runApp(MyApp1());
