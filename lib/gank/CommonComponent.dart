@@ -259,6 +259,7 @@ class ShowListWidget extends StatelessWidget {
                   return new WebPage(url: info.url, title: info.desc);
                 }));
           },
+          // Card 类似与android里面的CardView
           child: new Card(
             child: new InkWell(
               onTap: () {

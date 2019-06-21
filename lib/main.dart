@@ -33,9 +33,13 @@ import 'gank/MainPage.dart';
  * cd .
  * 运行 flutter install .
  *
+ *  未打包apk: 35.41M
+ *  打包后:6.21M
+ *
  * 遇到的坑:
  * flutter -webview 报错 err_cleartext_not_permitted(与原生类似)
  * https://www.cnblogs.com/gggggggxin/p/10518324.html
+ *
  *
  */
 // 程序入口
