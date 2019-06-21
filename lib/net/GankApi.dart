@@ -8,7 +8,7 @@ import 'package:gank_flutter/net/HttpGank.dart';
 class GankApi{
 
   // 异步加载async
-  Future<PageList> getListData(String type, int count, int pageIndex) async{
+  static Future<PageList> getListData(String type, int count, int pageIndex) async{
     var response = await HttpGank.getJson("data/$type/$count/$pageIndex", {});
     return PageList.fromJson(response);
   }
