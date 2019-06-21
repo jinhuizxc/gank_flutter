@@ -240,3 +240,92 @@ class WanListWidget extends StatelessWidget{
   }
 
 }
+
+// 显示分类列表
+class ShowListWidget extends StatelessWidget {
+  ShowListWidget({Key key, this.info, this.contexts}) : super(key: key);
+
+  final GankInfo info;
+  final BuildContext contexts;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Material(
+      child: new GestureDetector(
+          onTap: () {
+            //导航到新路由
+            Navigator.push(contexts == null ? context : contexts,
+                new MaterialPageRoute(builder: (context) {
+                  return new WebPage(url: info.url, title: info.desc);
+                }));
+          },
+          child: new Card(
+            child: new InkWell(
+              onTap: () {
+                Navigator.push(contexts == null ? context : contexts,
+                    new MaterialPageRoute(builder: (context) {
+                      return new WebPage(url: info.url, title: info.desc);
+                    }));
+              },
+              child: new Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: _getRowWidget(),
+              ),
+            ),
+            elevation: 3.0,
+            margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
+          )),
+    );
+  }
+
+  Widget _getRowWidget() {
+    return new Column(
+      children: <Widget>[
+        new Row(
+          children: [
+            new Expanded(
+              child: new Text(
+                info.desc,
+                maxLines: 3,
+                style: new TextStyle(fontSize: 15.0, height: 1.1),
+              ),
+            ),
+            info.images == null || info.images.isEmpty
+                ? new Text("")
+                : new Container(
+                margin: EdgeInsets.only(left: 8.0, bottom: 5.0),
+                child: new CachedNetworkImage(
+                  placeholder: (context, url) => new Image(
+                    image: AssetImage("images/holder.png"),
+                    fit: BoxFit.fitHeight,
+                    width: 60,
+                    height: 90,
+                  ),
+                  fit: BoxFit.fitHeight,
+                  imageUrl: info.images[0],
+                  width: 60,
+                  height: 90,
+                )),
+          ],
+        ),
+        new Container(
+          margin: EdgeInsets.only(top: 7.0),
+          child: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new Text(
+                  info.who + " · " + info.type,
+                  style: new TextStyle(color: c3, fontSize: 12.0),
+                ),
+              ),
+              new Text(
+                info.createdAt.substring(0, 10),
+                style: new TextStyle(color: c3, fontSize: 12.0),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
