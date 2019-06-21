@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gank_flutter/colors.dart';
 import 'package:gank_flutter/gank/CommonComponent.dart';
 import 'package:gank_flutter/gank/WebPage.dart';
 import 'package:gank_flutter/models/BannerData.dart';
@@ -20,6 +21,10 @@ class WanPage1 extends StatelessWidget {
 }
 
 class WanPage extends StatefulWidget {
+//  WanPage({Key key, this.type}) : super(key: key);
+//
+//  final String type;
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -93,7 +98,17 @@ class WanPageState extends State<WanPage> with AutomaticKeepAliveClientMixin {
   Widget _renderRow(BuildContext context, int index) {
     if (index == 0) {
       return _top();
-    } else {}
+    } else if (index % 2 == 0) {
+      if (index == _data.length * 2)
+        return Divider(height: 0, color: Colors.transparent);
+      return Divider(height: 0.5, color: c9);
+    } else if (index % 2 == 1) {
+      int i = (index / 2).ceil() - 1;
+      if (i < _data.length) {
+        return WanListWidget(info: _data[i]);
+      }
+    }
+    return _getMoreWidget();
   }
 
   void _pullNet() async {
@@ -106,11 +121,14 @@ class WanPageState extends State<WanPage> with AutomaticKeepAliveClientMixin {
     // 请求主页内容
     WanAndroidApi.getHomeList(_currentIndex, "").then((WanList list) {
       isLoading = false;
-      if (list.data.datas.isEmpty) {
-        _loadFinish = true;
-      } else {
-        _data.addAll(list.data.datas);
-      }
+      // 不设置setState, 会阻塞列表内容的获取;
+      setState(() {
+        if (list.data.datas.isEmpty) {
+          _loadFinish = true;
+        } else {
+          _data.addAll(list.data.datas);
+        }
+      });
     }).catchError((onErroe) {
       isLoading = false;
     });
@@ -147,5 +165,23 @@ class WanPageState extends State<WanPage> with AutomaticKeepAliveClientMixin {
       }));
     }
     return list;
+  }
+
+  /// 加载更多时显示的组件,给用户提示
+  Widget _getMoreWidget() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            CircularProgressIndicator(
+              strokeWidth: 1.0,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

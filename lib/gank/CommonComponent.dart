@@ -5,6 +5,7 @@ import 'package:gank_flutter/gank/DailyPage.dart';
 import 'package:gank_flutter/models/GankInfo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:gank_flutter/models/HistoryList.dart';
+import 'package:gank_flutter/models/WanList.dart';
 import '../colors.dart';
 import 'WebPage.dart';
 
@@ -174,4 +175,68 @@ class HistoryListWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+class WanListWidget extends StatelessWidget{
+
+  WanListWidget({Key key, this.info, this.contexts}) : super(key: key);
+
+  final Datas info;
+  final BuildContext contexts;
+
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Material(
+      child: new InkWell(
+        onTap: () {
+          Navigator.push(contexts == null ? context : contexts,
+              new MaterialPageRoute(builder: (context) {
+                return new WebPage(url: info.link, title: info.title);
+              }));
+        },
+        child: new Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: _getRowWidget(),
+        ),
+      ),
+    );
+  }
+
+  Widget _getRowWidget() {
+    return new Column(
+      children: <Widget>[
+        new Row(
+          children: [
+            new Expanded(
+              child: new Text(
+                info.title,
+                maxLines: 3,
+                style: new TextStyle(fontSize: 15.0, height: 1.1),
+              ),
+            ),
+          ],
+        ),
+        new Container(
+          margin: EdgeInsets.only(top: 7.0),
+          child: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new Text(
+                  info.niceDate + " · " + info.author,
+                  style: new TextStyle(color: c3, fontSize: 12.0),
+                ),
+              ),
+              new Text(
+                info.chapterName,
+                style: new TextStyle(color: c3, fontSize: 12.0),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
 }
